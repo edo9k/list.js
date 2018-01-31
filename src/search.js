@@ -33,6 +33,17 @@ module.exports = function(list) {
     setSearchString: function(s) {
       s = list.utils.toString(s).toLowerCase();
       s = s.replace(/[-[\]{}()*+?.,\\^$|#]/g, "\\$&"); // Escape regular expression characters
+
+      /* treat vowels with graphic signs just like plain ones */
+      s = s.replace(/[áàãâä]/gi,"a");
+      s = s.replace(/[éè¨ê]/gi,"e");
+      s = s.replace(/[íìïî]/gi,"i");
+      s = s.replace(/[óòöôõ]/gi,"o");
+      s = s.replace(/[úùüû]/gi, "u");
+      s = s.replace(/[ç]/gi, "c");
+      s = s.replace(/[ñ]/gi, "n");
+      /* end of custom code */      
+     
       searchString = s;
     },
     toArray: function(values) {
@@ -61,6 +72,17 @@ module.exports = function(list) {
     values: function(values, column) {
       if (values.hasOwnProperty(column)) {
         text = list.utils.toString(values[column]).toLowerCase();
+
+        /* treat vowels with graphic signs just like plain ones */
+        text = text.replace(/[áàãâä]/gi,"a");
+        text = text.replace(/[éè¨ê]/gi,"e");
+        text = text.replace(/[íìïî]/gi,"i");
+        text = text.replace(/[óòöôõ]/gi,"o");
+        text = text.replace(/[úùüû]/gi, "u");
+        text = text.replace(/[ç]/gi, "c");
+        text = text.replace(/[ñ]/gi, "n");
+        /* end of custom code */      
+
         if ((searchString !== "") && (text.search(searchString) > -1)) {
           return true;
         }
